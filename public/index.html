@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Buteo Analiz</title>
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo" aria-hidden="true">B</div>
+      <div>
+        <h1 id="company">Buteo Petrokimya</h1>
+        <p class="sub" id="source-line">Veriler yükleniyor…</p>
+      </div>
+    </div>
+    <div class="controls" role="toolbar" aria-label="Görünüm ayarları">
+      <div class="seg" id="mode" role="radiogroup" aria-label="Dönem">
+        <button data-v="day" role="radio">Günlük</button>
+        <button data-v="week" role="radio">Haftalık</button>
+        <button data-v="month" role="radio">Aylık</button>
+        <button data-v="year" role="radio">Yıllık</button>
+      </div>
+      <label class="field">Bitiş <input type="date" id="end"></label>
+      <div class="seg" id="currency" role="radiogroup" aria-label="Para birimi">
+        <button data-v="TRY" role="radio">TL</button>
+        <button data-v="USD" role="radio">USD</button>
+      </div>
+      <button class="icon-btn" id="theme" title="Açık / koyu tema" aria-label="Tema değiştir">◐</button>
+    </div>
+  </header>
+
+  <nav class="tabs" id="tabs" role="tablist">
+    <button data-tab="ceo" role="tab">CEO Özeti</button>
+    <button data-tab="sales" role="tab">Satış</button>
+    <button data-tab="finance" role="tab">Finans (CFO)</button>
+    <button data-tab="ops" role="tab">Satınalma &amp; Lojistik</button>
+    <button data-tab="data" role="tab">Veri &amp; Ayarlar</button>
+  </nav>
+
+  <main id="view" aria-live="polite"><div class="loading">Veriler hazırlanıyor…</div></main>
+
+  <script src="vendor/chart.umd.js"></script>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

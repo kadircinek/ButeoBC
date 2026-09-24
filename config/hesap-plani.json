@@ -1,0 +1,57 @@
+{
+  "_aciklama": "Business Central hesap planını analiz gruplarına eşler. Öncelik: overrides > transfer > anahtar kelime > en uzun önek. Hesap planınız Tekdüzen Hesap Planı'ndan farklıysa önekleri burada düzeltin.",
+
+  "overrides": {
+    "_ornek_760.01": "nakliye"
+  },
+
+  "transferPrefixes": ["690", "692", "761", "771", "781", "791", "621.99"],
+
+  "keywordScope": ["6", "7"],
+  "keywordGroups": [
+    { "group": "nakliye", "keywords": ["nakliye", "navlun", "taşıma", "tasima", "freight", "transport", "lojistik"] },
+    { "group": "depo",    "keywords": ["depo gider", "depolama", "ardiye", "antrepo", "storage", "warehouse", "elleçleme", "ellecleme"] },
+    { "group": "gumruk",  "keywords": ["gümrük", "gumruk", "customs", "müşavir", "musavir"] }
+  ],
+  "keywordExclude": ["depozito"],
+
+  "prefixGroups": [
+    { "prefix": "100", "group": "cash" },
+    { "prefix": "101", "group": "cheque_in" },
+    { "prefix": "102", "group": "bank" },
+    { "prefix": "108", "group": "bank" },
+    { "prefix": "120", "group": "receivable" },
+    { "prefix": "121", "group": "receivable" },
+    { "prefix": "15",  "group": "inventory" },
+    { "prefix": "300", "group": "loan" },
+    { "prefix": "303", "group": "loan" },
+    { "prefix": "320", "group": "payable" },
+    { "prefix": "321", "group": "payable" },
+    { "prefix": "400", "group": "loan" },
+    { "prefix": "600", "group": "revenue" },
+    { "prefix": "601", "group": "revenue" },
+    { "prefix": "602", "group": "revenue" },
+    { "prefix": "610", "group": "returns" },
+    { "prefix": "611", "group": "returns" },
+    { "prefix": "612", "group": "returns" },
+    { "prefix": "620", "group": "cogs" },
+    { "prefix": "621", "group": "cogs" },
+    { "prefix": "622", "group": "cogs" },
+    { "prefix": "623", "group": "cogs" },
+    { "prefix": "630", "group": "genel", "family": "6" },
+    { "prefix": "631", "group": "pazarlama", "family": "6" },
+    { "prefix": "632", "group": "genel", "family": "6" },
+    { "prefix": "64",  "group": "otherIncome" },
+    { "prefix": "65",  "group": "otherExpense" },
+    { "prefix": "660", "group": "finansman", "family": "6" },
+    { "prefix": "661", "group": "finansman", "family": "6" },
+    { "prefix": "67",  "group": "otherIncome" },
+    { "prefix": "68",  "group": "otherExpense" },
+    { "prefix": "691", "group": "tax" },
+    { "prefix": "760", "group": "pazarlama", "family": "7" },
+    { "prefix": "770", "group": "genel", "family": "7" },
+    { "prefix": "780", "group": "finansman", "family": "7" }
+  ],
+
+  "tonnageUnits": { "TON": 1, "TN": 1, "T": 1, "MT": 1, "KG": 0.001 }
+}
