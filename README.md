@@ -43,6 +43,7 @@ tarayıcı  <── public/ (arayüz + Chart.js) <── /api/dataset (şifre ko
 | Komut | Açıklama |
 |---|---|
 | `npm start` | Paneli başlatır |
+| `npm run bc:check` | BC bağlantısını ve tablo erişimlerini test eder |
 | `npm run sync` | BC'den verileri bir kez çeker |
 | `npm run demo` | Demo veriyi yeniden üretir |
 | `npm run export` | Paneli tek dosyalık HTML olarak dışa aktarır |

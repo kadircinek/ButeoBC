@@ -35,6 +35,7 @@ Birden fazla şirket kullanıyorsanız şirket adını `BC_COMPANY_NAME`'e yazı
 ```bash
 cp .env.example .env      # değerleri doldurun, DASHBOARD_PASSWORD'e güçlü bir şifre yazın
 npm install
+npm run bc:check          # bağlantı testi: yetki, tablolara erişim, hesap planı eşlemesi
 npm run sync              # ilk senkronizasyon; hangi tablodan kaç kayıt geldiğini yazar
 npm start                 # http://localhost:3000
 ```
