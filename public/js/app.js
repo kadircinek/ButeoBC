@@ -397,7 +397,7 @@ function viewData(r, status) {
     ${section('Veri kaynağı')}
     <div class="grid cols-2">
       <div class="card">
-        <h3>${m.source === 'bc' ? 'Microsoft Dynamics 365 Business Central' : 'Demo veri'}</h3>
+        <h3>${{ bc: 'Business Central (API)', excel: 'Business Central (Excel dışa aktarımı)', demo: 'Demo veri' }[m.source] || m.source}</h3>
         <p class="hint">Son güncelleme: ${new Date(m.syncedAt).toLocaleString('tr-TR')}</p>
         ${table(['Kayıt', 'Adet'], [
           ['Genel muhasebe (günlük özet)', ds.gl.length], ['Satış belgeleri', ds.sales.length], ['Satınalma belgeleri', ds.purchases.length],

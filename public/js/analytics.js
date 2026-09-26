@@ -263,8 +263,9 @@ function docStats(ctx, docs, range, cur, nameMap) {
       tons += t; p.tons += t;
       if (d.sp) people.get(d.sp).tons += t;
       if (!l.item) continue;
-      const pr = products.get(l.item) || { no: l.item, name: l.desc, net: 0, tons: 0 };
+      const pr = products.get(l.item) || { no: l.item, name: l.desc, net: 0, tons: 0, cost: 0 };
       pr.net += sign * l.net * v(d.date); pr.tons += t;
+      if (l.cost) pr.cost += sign * l.cost * v(d.date);
       products.set(l.item, pr);
     }
   }
@@ -325,7 +326,9 @@ export function analyze(ds, { mode = 'month', end = todayIso(), currency = 'TRY'
     return {
       ...p, name: itemNames.get(p.no) || p.name, pricePerTon: p.tons ? p.net / p.tons : null,
       prevNet: prev?.net || 0, prevTons: prev?.tons || 0,
-      estMargin: cpt && p.tons ? (p.net - cpt * p.tons) / p.net : null,
+      // Satır maliyeti biliniyorsa (kalem hareketleri) gerçek marj, yoksa ortalama alış fiyatıyla tahmin.
+      estMargin: p.cost > 0 && p.net ? (p.net - p.cost) / p.net : cpt && p.tons ? (p.net - cpt * p.tons) / p.net : null,
+      marginIsActual: p.cost > 0,
       share: sWin.total ? p.net / sWin.total : 0,
     };
   }).sort((a, b) => b.net - a.net);

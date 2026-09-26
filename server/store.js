@@ -4,6 +4,11 @@ import { dirname } from 'node:path';
 import { config, bcConfigured } from './config.js';
 import { syncFromBC } from './bc/sync.js';
 import { generateDemo } from './demo/generate.js';
+import { importExcelFolder } from './excel/import.js';
+import { existsSync } from 'node:fs';
+
+const IMPORTS_DIR = process.env.IMPORTS_DIR || new URL('../imports/', import.meta.url).pathname;
+const hasExcel = () => existsSync(`${IMPORTS_DIR}/hesap-plani.xlsx`) && existsSync(`${IMPORTS_DIR}/genel-muhasebe.xlsx`);
 
 let dataset = null;
 let lastError = null;
@@ -15,7 +20,7 @@ export async function getDataset() {
   if (!dataset) {
     try { dataset = JSON.parse(await readFile(config.dataFile, 'utf8')); } catch { /* önbellek yok */ }
   }
-  const staleDemo = dataset?.meta.source === 'demo' && (bcConfigured() || dataset.meta.syncedAt.slice(0, 10) !== today());
+  const staleDemo = dataset?.meta.source === 'demo' && (bcConfigured() || hasExcel() || dataset.meta.syncedAt.slice(0, 10) !== today());
   if (!dataset || staleDemo) await sync();
   return dataset;
 }
@@ -37,7 +42,8 @@ export function sync() {
   if (syncing) return syncing;
   syncing = (async () => {
     try {
-      const next = bcConfigured() ? await syncFromBC() : generateDemo({ end: today() });
+      // Öncelik: BC API > imports/ klasöründeki Excel dosyaları > demo veri
+      const next = bcConfigured() ? await syncFromBC() : hasExcel() ? await importExcelFolder(IMPORTS_DIR) : generateDemo({ end: today() });
       await mkdir(dirname(config.dataFile), { recursive: true });
       const tmp = `${config.dataFile}.tmp`;
       await writeFile(tmp, JSON.stringify(next));

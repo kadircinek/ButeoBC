@@ -4,7 +4,9 @@
   "description": "Buteo Petrokimya - Business Central verilerinden CEO/CFO/Satış analiz paneli",
   "type": "module",
   "private": true,
-  "engines": { "node": ">=20.12" },
+  "engines": {
+    "node": ">=20.12"
+  },
   "scripts": {
     "start": "node server/index.js",
     "dev": "node --watch server/index.js",
@@ -12,10 +14,13 @@
     "bc:check": "node scripts/bc-check.js",
     "demo": "node scripts/demo.js",
     "export": "node scripts/export-static.js",
+    "import": "node scripts/import-excel.js",
+    "report": "node scripts/report.js",
     "test": "node --test test/*.test.js"
   },
   "dependencies": {
     "chart.js": "^4.4.4",
+    "exceljs": "^4.4.0",
     "express": "^4.21.2"
   }
 }

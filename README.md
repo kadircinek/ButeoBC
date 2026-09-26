@@ -21,6 +21,8 @@ npm install
 npm start          # http://localhost:3000
 ```
 
+Veri üç yoldan gelebilir: **BC API** (`docs/KURULUM.md`), bilgisayarınızdaki Claude ajanının Chrome ile indirdiği **Excel dosyaları** (`docs/AJAN-GOREVI.md`, `npm run import`) veya ikisi de yoksa demo veri.
+
 Business Central bağlantısı tanımlı değilse panel, gerçekçi ama **tamamen kurgusal** bir demo veriyle açılır
 (üst kısımda "DEMO VERİ" etiketi görünür). Gerçek verilere bağlanmak için: **[docs/KURULUM.md](docs/KURULUM.md)**.
 
@@ -45,6 +47,8 @@ tarayıcı  <── public/ (arayüz + Chart.js) <── /api/dataset (şifre ko
 | `npm start` | Paneli başlatır |
 | `npm run bc:check` | BC bağlantısını ve tablo erişimlerini test eder |
 | `npm run sync` | BC'den verileri bir kez çeker |
+| `npm run import` | `imports/` klasöründeki BC Excel dosyalarını yükler |
+| `npm run report` | Kapsamlı Excel analiz raporu üretir (`reports/`) |
 | `npm run demo` | Demo veriyi yeniden üretir |
 | `npm run export` | Paneli tek dosyalık HTML olarak dışa aktarır |
 | `npm test` | Analiz motoru testleri |
