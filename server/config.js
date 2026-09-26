@@ -5,6 +5,8 @@ const env = process.env;
 
 export const config = {
   port: Number(env.PORT || 3000),
+  // Varsayılan olarak yalnızca bu bilgisayardan erişilir; ağa açmak için HOST=0.0.0.0 ve şifre gerekir.
+  host: env.HOST || '127.0.0.1',
   dashboardUser: env.DASHBOARD_USER || 'buteo',
   dashboardPassword: env.DASHBOARD_PASSWORD || '',
   dataFile: env.DATA_FILE || new URL('../data/dataset.json', import.meta.url).pathname,

@@ -7,11 +7,12 @@ import { getDataset, status, sync } from './store.js';
 const app = express();
 const root = (p) => fileURLToPath(new URL(p, import.meta.url));
 
-if (bcConfigured() && !config.dashboardPassword) {
-  console.error('HATA: Gerçek BC verisi için DASHBOARD_PASSWORD tanımlanmalı (.env).');
+const localOnly = ['127.0.0.1', 'localhost', '::1'].includes(config.host);
+if ((bcConfigured() || !localOnly) && !config.dashboardPassword) {
+  console.error('HATA: BC bağlantısı veya ağ erişimi (HOST) için DASHBOARD_PASSWORD tanımlanmalı (.env).');
   process.exit(1);
 }
-if (!config.dashboardPassword) console.warn('Uyarı: DASHBOARD_PASSWORD tanımlı değil, panel şifresiz (yalnızca demo veri).');
+if (!config.dashboardPassword) console.warn('Bilgi: Panel şifresiz; yalnızca bu bilgisayardan açılabilir.');
 
 // Basit HTTP Basic kimlik doğrulaması
 const safeEq = (a, b) => { const x = Buffer.from(a); const y = Buffer.from(b); return x.length === y.length && timingSafeEqual(x, y); };
@@ -46,7 +47,7 @@ app.use(express.static(root('../public'), { extensions: ['html'] }));
 
 app.use((err, req, res, _next) => res.status(500).json({ error: err.message }));
 
-app.listen(config.port, () => {
+app.listen(config.port, config.host, () => {
   console.log(`Buteo Analiz: http://localhost:${config.port}  (veri kaynağı: ${bcConfigured() ? 'Business Central' : 'DEMO'})`);
   if (bcConfigured() && config.syncIntervalMinutes > 0) {
     setInterval(() => sync().catch(() => {}), config.syncIntervalMinutes * 60_000);
